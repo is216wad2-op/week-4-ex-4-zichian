@@ -1,0 +1,43 @@
+<html>
+   <head>
+      <title>Event Handling</title>
+   </head>
+   <body>
+     
+      <h1>Shopping List</h1>
+      <p>Get it done today</p>
+      <input id="userinput"  type="text" placeholder="enter items">
+      <button id="enter" onclick="addListAfterClick()">Enter</button>
+      <ul>
+         <li>Notebook</li>
+         <li>Jello</li>
+         <li>Spinach</li>
+         <li>Rice</li>
+         <li>Birthday Cake</li>
+         <li>Candles</li>
+      </ul>
+      
+      <script>
+      
+         function addListAfterClick() {
+            var ul = document.getElementsByTagName("ul")[0];
+            var li = document.createElement("li");
+            var input = document.getElementById("userinput");
+            // add new item only if the user has entered something
+            if (input.value.length > 0) {
+               var textNode = document.createTextNode(input.value);
+               li.appendChild(textNode);
+               ul.appendChild(li);
+               input.value = "";
+            }
+            // following alternative code also works but is unsafe
+            // try entering the input <h2>abcd</h2>
+            // var input = document.getElementById("userinput");
+            // var ul = document.getElementsByTagName("ul")[0];
+            // ul.innerHTML += input.value
+         }
+
+      </script>
+ 
+   </body>
+</html>
