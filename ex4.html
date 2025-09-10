@@ -6,15 +6,34 @@
      
       <h1>Shopping List</h1>
       <p>Get it done today</p>
-      <input id="userinput"  type="text" placeholder="enter items">
-      <button id="enter" onclick="addListAfterClick()">Enter</button>
+      
+      <input type="text" name="item" id="userinput" onkeypress="addListAfterKeyPress()" placeholder="Enter items">
+         <input type="submit" value="Enter" onclick="addListAfterClick()">
+
       <ul>
-         <li>Notebook</li>
-         <li>Jello</li>
-         <li>Spinach</li>
-         <li>Rice</li>
-         <li>Birthday Cake</li>
-         <li>Candles</li>
+         <li>Notebook 
+            <button onclick="remove(this.parentNode)">delete</button>
+         </li>
+
+         <li>Jello
+            <button onclick="remove(this.parentNode)">delete</button>
+         </li>
+
+         <li>Spinach 
+            <button onclick="remove(this.parentNode)">delete</button>
+         </li>
+
+         <li>Rice 
+            <button onclick="remove(this.parentNode)">delete</button>
+         </li>
+
+         <li>Birthday Cake 
+            <button onclick="remove(this.parentNode)">delete</button>
+         </li>
+
+         <li>Candles 
+            <button onclick="remove(this.parentNode)">delete</button>
+         </li>
       </ul>
       
       <script>
@@ -36,6 +55,43 @@
             // var ul = document.getElementsByTagName("ul")[0];
             // ul.innerHTML += input.value
          }
+
+         function addListAfterKeyPress(){
+            // console.log(event);
+            var input= document.getElementById("userinput");
+
+            if (input.value.length >0 && event.keyCode == 13){
+               createNewItem(input);
+
+            }
+        }
+
+        function createNewItem(input){
+            if (input.value.length >0){
+               var ul = document.getElementsByTagName("ul")[0]; // selects the first ul block
+               var li = document.createElement("li");  // <li></li>
+
+               var textNode = document.createTextNode(input.value); // eg. Candy
+               li.appendChild(textNode); // <li>Candy</li>
+
+               var btn = document.createElement("button");
+               var deleteNode = document.createTextNode("delete");
+               btn.appendChild(deleteNode);
+               btn.addEventListener('click', function() {
+                  remove(this.parentNode)
+               })
+               li.appendChild(btn);
+
+               ul.appendChild(li); // add <li>Candy</li> into <ul> elem
+
+               //clear the input box after adding the item
+               input.value= "";
+            }
+        }
+
+        function remove(obj){
+         obj.remove();
+        }
 
       </script>
  
